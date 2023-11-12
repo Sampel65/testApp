@@ -1,4 +1,7 @@
 # testApp
+This is a simple movie list application with two screens i.e the movie list screen and the details screen . 
+
+
 ![Screenshot 2023-11-12 at 13 54 35](https://github.com/Sampel65/testApp/assets/105233771/9af078e2-33cb-4d5d-8c1a-3fe8b63787fc)
 
 
