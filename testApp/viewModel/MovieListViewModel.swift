@@ -14,6 +14,8 @@ class MovieListViewModel: ObservableObject {
     func fetchData() {
         let apiKey = "c0e0a94c792e260b9a99d191f944acdd"
         let apiUrl = URL(string: "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=\(apiKey)")!
+      
+       // let apiUrl = URL(string: "https://api.themoviedb.org/3/discover/movie?sort_by=nowplaying&api_key=\(apiKey)")!
 
         URLSession.shared.dataTask(with: apiUrl) { (data, response, error) in
             guard let data = data else {

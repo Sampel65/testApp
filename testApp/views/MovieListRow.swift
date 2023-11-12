@@ -22,6 +22,7 @@ struct MovieListRow: View {
                         .scaledToFill()
                         .frame(width: 50, height: 75)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
+                        
                 case .failure:
                     Text("Failed to load image")
                 @unknown default:

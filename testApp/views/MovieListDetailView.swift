@@ -11,45 +11,51 @@ struct MovieListDetailView: View {
     var movie: MovieModel
     
     var body: some View {
-        VStack {
-            AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w300\(movie.posterPath)")) { phase in
-                switch phase {
-                case .empty:
-                    Text("Loading...")
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 300)
-                case .failure:
-                    Text("Failed to load image")
-                @unknown default:
-                    Text("Unknown state")
+        ScrollView {
+            VStack {
+                AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w300\(movie.posterPath)")) { phase in
+                    switch phase {
+                    case .empty:
+                        Text("Loading...")
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .frame( height: 300)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.black, lineWidth: 7)
+                            )
+                    case .failure:
+                        Text("Failed to load image")
+                    @unknown default:
+                        Text("Unknown state")
+                    }
                 }
+                
+                Text(movie.title)
+                    .font(.subheadline)
+                    .padding()
+                
+                Text("Release Date: \(movie.releaseDate)")
+                    .foregroundColor(.gray)
+                
+                // Display genre information
+                Text("Genres: \(genreNames(for: movie.genreIds))")
+                    .foregroundColor(.gray)
+ 
+                
+                Text(movie.overview)
+                    .padding()
+                    .multilineTextAlignment(.center)
+                
+
+                Spacer()
             }
-            
-            Text(movie.title)
-                .font(.title)
-                .padding()
-            
-            Text("Release Date: \(movie.releaseDate)")
-                .foregroundColor(.gray)
-                .padding()
-            
-            Text(movie.overview)
-                .padding()
-            
-            // Display genre information
-            Text("Genres: \(genreNames(for: movie.genreIds))")
-                .foregroundColor(.gray)
-                .padding()
-            
-            Spacer()
+            .padding()
         }
-        .padding()
         .navigationTitle(movie.title)
-    }
-    
+}
     private func genreNames(for genreIds: [Int]) -> String {
         
         let genreMapping: [Int: String] = [
